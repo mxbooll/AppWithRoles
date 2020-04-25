@@ -34,7 +34,7 @@ namespace AppWithRoles.Controllers
                 {
                     // add user in database
                     user = new User { Email = model.Email, Password = model.Password };
-                    Role userRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "user");
+                    Role userRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "group1");
                     if (userRole != null)
                         user.Role = userRole;
 
