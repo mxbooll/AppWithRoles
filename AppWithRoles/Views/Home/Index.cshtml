@@ -1,8 +1,16 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using AppWithRoles.Models.Enum
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p></p>
+    @{
+        if (@Model == UserRole.Group1)
+        {
+            <p>Hello @Model</p>
+        }
+        if (@Model == UserRole.Group2)
+        {
+            <p>Hi @Model</p>
+        }
+    }
 </div>

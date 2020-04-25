@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AppWithRoles.Models.Enum;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -9,8 +10,21 @@ namespace AppWithRoles.Controllers
         [Authorize(Roles = "group1, group2")]
         public IActionResult Index()
         {
-            string role = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultRoleClaimType).Value;
-            return Content($"ваша группа: {role}");
+            var role = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultRoleClaimType).Value;
+
+            switch (role)
+            {
+                case "group1":
+                    ViewBag.UserRole = UserRole.Group1;
+                    return View(UserRole.Group1);
+                case "group2":
+                    ViewBag.UserRole = UserRole.Group2;
+                    return View(UserRole.Group2);
+                default:
+                    break;
+            }   
+            
+            return View(UserRole.Unknown);
         }
 
         [Authorize(Roles = "group1")]
